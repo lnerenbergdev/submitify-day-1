@@ -26,12 +26,15 @@ function createProjectHMTL(project) {
 	projectDiv.find(".project_author").text(project.author);
 	projectDiv.find(".project_description").text(project.description);
 	projectDiv.find(".project_vote_button").text(project.id);
-	projectDiv.find(".project_vote_count").text(project.votes.length);
+
+	projectDiv.find(".project_vote_count").text("Votes: ");
+	projectDiv.find(".project_vote_count").append(project.votes.length);
 
 	// Add vote button
 	projectDiv.find(".project_vote_button").click(function() {
 		$.post('/api/project-vote', project, function(res) {
-			projectDiv.find(".project_vote_count").text(res.votecount);
+			projectDiv.find(".project_vote_count").text("Votes: ");
+			projectDiv.find(".project_vote_count").append(res.votecount);
 		}, 'json');
 	}.bind(this));
 
