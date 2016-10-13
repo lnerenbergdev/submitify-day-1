@@ -27,11 +27,15 @@ function Storage() {
 	};
 
 	// get the vote count of a project given its id
-	this.getVoteCount = (projectID, cb) => {
-		var voteCount = projects[projectID].getVoteCount();
+	this.getVotes = (projectID, cb) => {
+		var votes = {
+			count:projects[projectID].getVoteCount(),
+			list:projects[projectID].getVoteList()
+		};
+
 
 		if(cb){
-			cb(voteCount);
+			cb(votes);
 		}
 	};
 

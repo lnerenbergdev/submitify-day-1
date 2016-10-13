@@ -27,14 +27,25 @@ function createProjectHMTL(project) {
 	projectDiv.find(".project_description").text(project.description);
 	projectDiv.find(".project_vote_button").text(project.id);
 
-	projectDiv.find(".project_vote_count").text("Votes: ");
+	// display vote count
+	projectDiv.find(".project_vote_count").text("Vote Count: ");
 	projectDiv.find(".project_vote_count").append(project.votes.length);
 
+	// Display who voted 
+	projectDiv.find(".project_vote_list").text(project.votes);
+
 	// Add vote button
-	projectDiv.find(".project_vote_button").click(function() {
-		$.post('/api/project-vote', project, function(res) {
-			projectDiv.find(".project_vote_count").text("Votes: ");
-			projectDiv.find(".project_vote_count").append(res.votecount);
+	projectDiv.find(".project_vote_button").click(function() { 
+		var data = {
+			projectID:project.id,
+			userName:user.name
+		};
+
+		$.post('/api/project-vote', data, function(votes) {
+			projectDiv.find(".project_vote_count").text("Vote Count: ");
+			projectDiv.find(".project_vote_count").append(votes.count);
+
+			projectDiv.find(".project_vote_list").text(votes.list);
 		}, 'json');
 	}.bind(this));
 
@@ -50,7 +61,7 @@ function createProjectHMTL(project) {
 $(document).ready(function() {
 
 	// Test user
-	var username = "Elephante";
+	user.name = prompt("Enter test username");
 
 	/*
 		Get all of the projects from the server via AJAX. Uses the
@@ -58,7 +69,6 @@ $(document).ready(function() {
 		"No projects!". Otherwise we build the projects into HTML and display
 		them on the page.
 	*/
-
 
 	$.get('/api/projects', function(res) {
 		// res here is what we ("res.send") on the backend
@@ -80,7 +90,7 @@ $(document).ready(function() {
 
 		var project = {
 			name: $('#new_project_name').val(),
-			description: $('#new_project_description').val()
+			description: $('#new_ roject_description').val()
 		};
 
 		console.log('buttonpress');

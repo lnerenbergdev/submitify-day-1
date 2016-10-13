@@ -16,6 +16,10 @@ function Project(name, description, author) {
 		return this.votes.length;
 	};
 
+	this.getVoteList = () => {
+		return this.votes;
+	};
+
 	this.addVote = (user_id) => {
 		if (this.votes.includes(user_id)) {
 			return false;

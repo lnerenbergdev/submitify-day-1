@@ -64,13 +64,10 @@ app.post("/api/project", (req, res) => {
 app.post("/api/project-vote", (req, res) => {
 	// Username is placeholder for username, assuming it's primary key
 
-	// req.body.userID 
-	storage.voteOnProject(req.body.id, 'username', () => {
-		storage.getVoteCount(req.body.id, (voteCount) => {
-			var response = {
-				votecount:voteCount
-			};
-			res.send(response);
+	//Req body contains projectID and userName
+	storage.voteOnProject(req.body.projectID, req.body.userName, () => {
+		storage.getVotes(req.body.projectID, (votes) => {
+			res.send(votes);
 		});
 	});
 });
