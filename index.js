@@ -21,11 +21,11 @@ var storage = new Storage();
 // Create two test projects, so we have some data on the frontend.
 // Todo: remove this for production!
 storage.addProject(
-	new Project("Test", "Testing a project", "Me",0)
+	new Project("Test", "Testing a project", "Me");
 );
 
 storage.addProject(
-	new Project("Test 2", "Testing another project", "You",1)
+	new Project("Test 2", "Testing another project", "You");
 );
 
 // give us req.body for post requests

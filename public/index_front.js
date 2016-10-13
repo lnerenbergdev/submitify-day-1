@@ -63,8 +63,10 @@ $(document).ready(function() {
 	/*
 		When we click on the "send new project" button...
 	*/
-	$('#send_new_project').click(function() {
+	$('#send_new_project').click(function(id) {
 		// gather our data
+
+
 		var project = {
 			name: $('#new_project_name').val(),
 			description: $('#new_project_description').val()

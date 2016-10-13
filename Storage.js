@@ -11,9 +11,10 @@ function Storage() {
 
 	this.addProject = (project, cb)  => {
 		// cb = callback
+		project.id = projects.length;
 		projects.push(project);
 		if (cb) {
-			cb();
+			cb(project.id);
 		}
 	};
 

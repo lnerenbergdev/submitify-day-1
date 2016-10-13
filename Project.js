@@ -4,8 +4,8 @@
 	Description of a Project object. Currently only on the backend, but
 	we could actually share this with the frontend if we wanted... hmm...
 */
-function Project(name, description, author, id) {
-	this.id = id;
+function Project(name, description, author) {
+	this.id = 0;
 	this.name = name;
 	this.description = description;
 	this.votes = [];
