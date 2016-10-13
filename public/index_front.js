@@ -8,22 +8,31 @@
 	votes array), and returns a DOM element clone of the project template. (An
 	HTML element that we can append to the page later).
 */
+var user = {
+	name:"1"
+};
+
 function createProjectHMTL(project) {
 	// clone the template
 	var projectDiv = $('#project_template').clone();
 	// remove the id (only one thing with each id)
 	projectDiv.removeAttr("id");
 
+	// Set project div id to the id of the project
 	projectDiv.attr("id", project.id);
+
 	// set name, author, and description
 	projectDiv.find(".project_name").text(project.name);
 	projectDiv.find(".project_author").text(project.author);
 	projectDiv.find(".project_description").text(project.description);
 	projectDiv.find(".project_vote_button").text(project.id);
+	projectDiv.find(".project_vote_count").text(project.votes.length);
 
 	// Add vote button
 	projectDiv.find(".project_vote_button").click(function() {
-		$.post('/api/project-vote', project, function(res) {}, 'json');
+		$.post('/api/project-vote', project, function(res) {
+			projectDiv.find(".project_vote_count").text(res.votecount);
+		}, 'json');
 	}.bind(this));
 
 	// show this clone of the template (template is hidden by default)
@@ -65,7 +74,6 @@ $(document).ready(function() {
 	*/
 	$('#send_new_project').click(function(id) {
 		// gather our data
-
 
 		var project = {
 			name: $('#new_project_name').val(),

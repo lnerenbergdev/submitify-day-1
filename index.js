@@ -21,11 +21,11 @@ var storage = new Storage();
 // Create two test projects, so we have some data on the frontend.
 // Todo: remove this for production!
 storage.addProject(
-	new Project("Test", "Testing a project", "Me");
+	new Project("Test", "Testing a project", "Me")
 );
 
 storage.addProject(
-	new Project("Test 2", "Testing another project", "You");
+	new Project("Test 2", "Testing another project", "You")
 );
 
 // give us req.body for post requests
@@ -62,14 +62,17 @@ app.post("/api/project", (req, res) => {
 });
 
 app.post("/api/project-vote", (req, res) => {
-	
+	// Username is placeholder for username, assuming it's primary key
 
+	// req.body.userID 
 	storage.voteOnProject(req.body.id, 'username', () => {
-		res.send('username');
+		storage.getVoteCount(req.body.id, (voteCount) => {
+			var response = {
+				votecount:voteCount
+			};
+			res.send(response);
+		});
 	});
-	console.log(req.body.id);
-
-	
 });
 
 // serve anything in the "public" directory without changes

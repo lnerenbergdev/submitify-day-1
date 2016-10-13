@@ -5,7 +5,8 @@
 	we could actually share this with the frontend if we wanted... hmm...
 */
 function Project(name, description, author) {
-	this.id = 0;
+	// Default project id
+	this.id = -1;
 	this.name = name;
 	this.description = description;
 	this.votes = [];
